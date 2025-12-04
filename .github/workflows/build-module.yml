@@ -31,7 +31,7 @@ jobs:
             pkgarch: aarch64_cortex-a53
             target: qualcommax
             subtarget: ipq60xx
-            vermagic: "6.12.57~1-r1"
+            vermagic: "d252aa02cbf856461cfaf2dd2686c00b"
 
     steps:
       - uses: actions/checkout@v4
