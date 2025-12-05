@@ -134,9 +134,9 @@ jobs:
             EXT="ipk"
           fi
           
-          cp bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/amneziawg-tools_*.$EXT awgrelease/amneziawg-tools_${postfix}.$EXT
-          cp bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/luci-app-amneziawg_*.$EXT awgrelease/luci-app-amneziawg_${postfix}.$EXT
-          cp bin/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/packages/kmod-amneziawg_*.$EXT awgrelease/kmod-amneziawg_${postfix}.$EXT
+          cp bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/amneziawg-tools-*.$EXT awgrelease/amneziawg-tools_${postfix}.$EXT
+          cp bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/luci-app-amneziawg-*.$EXT awgrelease/luci-app-amneziawg_${postfix}.$EXT
+          cp bin/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/packages/kmod-amneziawg-*.$EXT awgrelease/kmod-amneziawg_${postfix}.$EXT
 
       - name: Release
         uses: softprops/action-gh-release@v1
