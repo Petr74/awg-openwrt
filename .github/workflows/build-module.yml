@@ -127,16 +127,18 @@ jobs:
           mkdir -p awgrelease
           postfix="${tag_name}_v${{ matrix.build_env.tag }}_${{ matrix.build_env.pkgarch}}_${{ matrix.build_env.target}}_${{ matrix.build_env.subtarget}}"
           
-          # SNAPSHOT uses .apk format, releases use .ipk
+          # SNAPSHOT uses .apk format with dash separator, releases use .ipk with underscore
           if [[ "${{ matrix.build_env.tag }}" == *"SNAPSHOT"* ]]; then
             EXT="apk"
+            SEP="-"
           else
             EXT="ipk"
+            SEP="_"
           fi
           
-          cp bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/amneziawg-tools_*.$EXT awgrelease/amneziawg-tools_${postfix}.$EXT
-          cp bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/luci-app-amneziawg_*.$EXT awgrelease/luci-app-amneziawg_${postfix}.$EXT
-          cp bin/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/packages/kmod-amneziawg_*.$EXT awgrelease/kmod-amneziawg_${postfix}.$EXT
+          cp bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/amneziawg-tools${SEP}*.$EXT awgrelease/amneziawg-tools_${postfix}.$EXT
+          cp bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/luci-app-amneziawg${SEP}*.$EXT awgrelease/luci-app-amneziawg_${postfix}.$EXT
+          cp bin/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/packages/kmod-amneziawg${SEP}*.$EXT awgrelease/kmod-amneziawg_${postfix}.$EXT
 
       - name: Release
         uses: softprops/action-gh-release@v1
