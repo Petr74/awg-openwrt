@@ -27,7 +27,7 @@ jobs:
             target: ramips
             subtarget: mt7621
             vermagic: "9c242f353867f49a96054ff8c9f2c460"
-          - tag: "24.10-SNAPSHOT"
+          - tag: "24.10.0"
             pkgarch: aarch64_cortex-a53
             target: qualcommax
             subtarget: ipq60xx
@@ -127,9 +127,16 @@ jobs:
           mkdir -p awgrelease
           postfix="${tag_name}_v${{ matrix.build_env.tag }}_${{ matrix.build_env.pkgarch}}_${{ matrix.build_env.target}}_${{ matrix.build_env.subtarget}}"
           
-          # All versions use .ipk format with underscore separator
-          EXT="ipk"
-          SEP="_"
+          # Detect package format: .ipk or .apk
+          if ls bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/*.ipk 1> /dev/null 2>&1; then
+            EXT="ipk"
+            SEP="_"
+          else
+            EXT="apk"
+            SEP="-"
+          fi
+          
+          echo "Using package format: .$EXT with separator: $SEP"
           
           cp bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/amneziawg-tools${SEP}*.$EXT awgrelease/amneziawg-tools_${postfix}.$EXT
           cp bin/packages/${{ matrix.build_env.pkgarch }}/awgopenwrt/luci-app-amneziawg${SEP}*.$EXT awgrelease/luci-app-amneziawg_${postfix}.$EXT
